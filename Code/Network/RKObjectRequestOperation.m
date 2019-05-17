@@ -319,7 +319,8 @@ static NSString *RKStringDescribingURLResponseWithData(NSURLResponse *response, 
         self.HTTPRequestOperation.successCallbackQueue = [[self class] dispatchQueue];
         self.HTTPRequestOperation.failureCallbackQueue = [[self class] dispatchQueue];
         
-        __weak __typeof(self)weakSelf = self;
+        // Sourabh removed __weak in version 0.27.2 and publish it as 0.27.3.1
+        __typeof(self)weakSelf = self;
         self.stateMachine = [[RKOperationStateMachine alloc] initWithOperation:self dispatchQueue:[[self class] dispatchQueue]];
         [self.stateMachine setExecutionBlock:^{
             [[NSNotificationCenter defaultCenter] postNotificationName:RKObjectRequestOperationDidStartNotification object:weakSelf];
